@@ -1,6 +1,8 @@
 #! /usr/bin/python3
 # 
-# Write the FFRR deck
+# Write the FastCube Serpent deck
+# Ondrej Chvala, ochvala@utk.edu
+# 2016-07-30
 
 import cubedeck
 import os

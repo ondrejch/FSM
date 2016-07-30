@@ -1,13 +1,22 @@
 #!/usr/bin/python3
 #
-# Generate Serpent deck
+# Generate Serpent deck for FastCube Serpent deck
 # Ondrej Chvala, ochvala@utk.edu
+# 2016-07-30
 
 import materials
 import cells
 import surfaces
 
 def write_deck(N, r, refl):
+    '''Function to write the FastCube Serpent input deck.
+    Inputs: 
+        N:     size of the N x N checkerboard lattice
+        r:     radius of the fuel in the fuel pin [cm]
+        refl:  reflector thickness [cm]
+    Outputs:
+        output: String containing the FastCube deck'''
+
     # Header
     output = '''\
 set title "Fast Flux Research Reactor, N {N}, rfuel {r}, reflector thickness {refl}"
@@ -61,6 +70,6 @@ mesh 3 3000 3000
     return output
 
 if __name__ == '__main__':
-    print("This module writes the deck.")
+    print("This module writes the deck for FastCube Serpent deck.")
     input("Press Ctrl+C to quit, or enter else to test it. ")
     print(write_deck(11, 1.25, 25))

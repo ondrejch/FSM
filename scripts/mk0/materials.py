@@ -1,7 +1,8 @@
 #!/usr/bin/python3
 #
-# Generate materials
+# Generate materials for FastCube Serpent deck
 # Ondrej Chvala, ochvala@utk.edu
+# 2016-07-30
 
 def write_materials(lib = '03c'):
 	'''Function to write material cards for Serpent input deck.
@@ -60,6 +61,6 @@ mat ssteel -7.99949E+00 tmp 300.0 rgb 120 120 120
 	return mats
 
 if __name__ == '__main__':
-	print("This module writes materials for the MSBR lattice.")
+	print("This module writes materials for FastCube Serpent deck.")
 	input("Press Ctrl+C to quit, or enter else to test it. ")
 	print(write_materials())
