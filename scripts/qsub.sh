@@ -21,6 +21,6 @@ sss2 -omp 4 ffrr.inp
 # rm ffrrg.inp.out
 
 # Extract useful data
-awk 'BEGIN{ORS="\t"} /ANA_KEFF/ || /CONVERSION/ {print $7" "$8;}' ffrrg.inp_res.m > done.out
-grep ffrrg msbr.inp | sed -e s/[a-Z,\"]//g  >> done.out
+awk 'BEGIN{ORS="\t"} /ANA_KEFF/ || /CONVERSION/ {print $7" "$8;}' ffrr.inp_res.m > done.out
+grep "Fast Flux" ffrr.inp | sed -e s/[a-Z,\"]//g  >> done.out
 
