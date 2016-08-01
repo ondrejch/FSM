@@ -1,8 +1,10 @@
 #!/usr/bin/python3
 #
-# Generate surfaces, pins, and lattice for FastCube Serpent deck 
+# Generate surfaces, pins, and lattice for FastDrum Serpent deck 
 # Ondrej Chvala, ochvala@utk.edu
-# 2016-07-30
+# 2016-08-02
+
+import math
 
 def write_surfaces(N, r, refl):
     '''Function to write material cards for Serpent input deck.
@@ -15,11 +17,11 @@ def write_surfaces(N, r, refl):
     
     rclad = r + 0.1                 # Claddind outer radius              
     pitch = 2.0 * rclad + 0.01      # Lattice pitch
-    l10   = N * pitch / 2.0         # Half-size of the cube bounding the latice
-    l20   = l10 + pitch             # Half-size of the cube bounding the lead block
-    l21   = l20 +  0.1              # Half-size of the air gap cube
-    l22   = l21 + refl              # Half-size of the steel reflecot cube
-    fuel_rod_weight = 19.1 * 3.1415927 * r*r * l10 # Uranium mass in each rod [g]
+    l10   = N * pitch / 2.0         # Radius of the cylinder bounding the latice
+    l20   = l10 + pitch             # Radius of the cylinder bounding the lead block
+    l21   = l20 +  0.1              # Radius of the air gap cylinder
+    l22   = l21 + refl              # Radius of the steel reflector cylinder
+    fuel_rod_weight = 19.1 * math.pi * r*r * l10 # Uranium mass in each rod [g]
 
     surfaces = '''
 %______________pins_________________________________________________
@@ -34,10 +36,11 @@ lead
 
 %______________surface definitions__________________________________
 
-surf 10 cube 0 0 0 {l10}
-surf 20 cube 0 0 0 {l20}
-surf 21 cube 0 0 0 {l21}
-surf 22 cube 0 0 0 {l22}
+surf 10 cyl 0 0 {l10} -{l10} {l10}    % Inner cylinder with the lattice
+surf 20 cyl 0 0 {l20} -{l20} {l20}    % Lead cyllinder around the core
+surf 21 cyl 0 0 {l21} -{l21} {l21}    % Air gap - likely useless
+surf 22 cyl 0 0 {l22} -{l22} {l22}    % Radial reflector
+% surf 23 cyl 0 0 {l21}  {l21} {l22}    % Axial reflector - top
 
 %______________lattice definitions_____________
 
@@ -51,7 +54,8 @@ lat 50 1 0 0 {N} {N} {pitch}
 
         for j in range(N):
             jodd = 0
-            if (j+iodd) % 2:
+            r_lat = math.sqrt((i-N/2.0 + 0.5)**2 + (j-N/2.0 + 0.5)**2) # cell radius in the lattice in units of N  
+            if ((j+iodd) % 2) and (r_lat < (N-1)/2.0) :
                 surfaces += "1 "
                 n_fuel_rods = n_fuel_rods + 1
             else:
@@ -68,6 +72,6 @@ lat 50 1 0 0 {N} {N} {pitch}
     return surfaces
 
 if __name__ == '__main__':
-    print("This module writes surfaces, pins, and lattice for FastCube Serpent deck.")
+    print("This module writes surfaces, pins, and lattice for FastDrum Serpent deck.")
     input("Press Ctrl+C to quit, or enter else to test it.")
     print(write_surfaces(11, 1.25, 50))
