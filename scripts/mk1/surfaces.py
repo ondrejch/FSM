@@ -40,7 +40,6 @@ surf 10 cyl 0 0 {l10} -{l10} {l10}    % Inner cylinder with the lattice
 surf 20 cyl 0 0 {l20} -{l20} {l20}    % Lead cyllinder around the core
 surf 21 cyl 0 0 {l21} -{l21} {l21}    % Air gap - likely useless
 surf 22 cyl 0 0 {l22} -{l22} {l22}    % Radial reflector
-% surf 23 cyl 0 0 {l21}  {l21} {l22}    % Axial reflector - top
 
 %______________lattice definitions_____________
 

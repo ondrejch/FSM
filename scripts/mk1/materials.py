@@ -2,7 +2,7 @@
 #
 # Generate materials for FastDrum Serpent deck
 # Ondrej Chvala, ochvala@utk.edu
-# 2016-07-30
+# 2016-08-02
 
 def write_materials(lib = '03c'):
 	'''Function to write material cards for Serpent input deck.
