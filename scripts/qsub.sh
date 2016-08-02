@@ -2,7 +2,7 @@
 
 # Jub submission script for TORQUE
 # Ondrej Chvala, ochvala@utk.edu
-# 2016-07-16
+# 2016-08-02
 # GNU/GPL
 
 #PBS -V
@@ -18,7 +18,7 @@ cd ${PBS_O_WORKDIR}
 sss2 -omp 4 ffrr.inp
 
 # We do not need this file, safe disk pace
-# rm ffrrg.inp.out
+# rm ffrr.inp.out
 
 # Extract useful data
 awk 'BEGIN{ORS="\t"} /ANA_KEFF/ || /CONVERSION/ {print $7" "$8;}' ffrr.inp_res.m > done.out
