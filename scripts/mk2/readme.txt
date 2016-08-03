@@ -1,0 +1,1 @@
+FSM mk2 is FastDrum with salt bearing pipe - cylindrical reactor with sqaure 20% LEU and lead chessboard lattice with NU salt in the core
