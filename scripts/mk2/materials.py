@@ -31,7 +31,7 @@ mat air -0.001205 tmp 300 rgb 200 200 200
  8016.03c   -0.231781
 18040.03c   -0.012827
 
-mat salt -4.326 tmp 300 rbg 50 190 50 % FNaK with natural uranium 
+mat salt -4.326 tmp 300 rbg 50 240 50 % FNaK with natural uranium 
  11023.30c  -0.095468   %  Na
   9019.30c  -0.287453   %  F
  92235.30c  -0.001644   %  U
