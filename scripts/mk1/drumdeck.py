@@ -66,6 +66,20 @@ mesh 3 3000 3000
 '''
     output += plot_cards
 
+    # XY neutron flux plots - commented out by default
+    flux_xy_cards = '''
+% Flux plots in XY plane - commented out by default
+% Energy grid 
+%ene groupE 1 1E-11 6.25e-7 0.05 20
+% Define mesh cell volume 
+%det mydet dv 4
+%de groupE
+%dx -100 100 201
+%dy -100 100 201
+%dz  -2 2 1
+'''
+    output += flux_xy_cards
+
     output = output.format(**locals())
     return output
 
