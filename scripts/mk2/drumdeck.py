@@ -8,12 +8,14 @@ import materials
 import cells
 import surfaces
 
-def write_deck(N, r, refl):
+def write_deck(N=11, r=1.25, refl=30, Nports=0, rport=5.0):
     '''Function to write the FastDrum Serpent input deck.
     Inputs: 
-        N:     size of the N x N checkerboard lattice
-        r:     radius of the fuel in the fuel pin [cm]
-        refl:  reflector thickness [cm]
+        N:      size of the N x N checkerboard lattice
+        r:      radius of the fuel in the fuel pin [cm]
+        refl:   reflector thickness [cm]
+        Nports: number of beam ports [0,1,2,3]
+        rport:  radius of a port [cm]
     Outputs:
         output: String containing the FastDrum deck'''
 
@@ -86,4 +88,4 @@ mesh 3 3000 3000
 if __name__ == '__main__':
     print("This module writes the deck for FastDrum Serpent deck.")
     input("Press Ctrl+C to quit, or enter else to test it. ")
-    print(write_deck(11, 1.25, 25))
+    print(write_deck())

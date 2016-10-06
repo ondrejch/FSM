@@ -6,12 +6,14 @@
 
 import math
 
-def write_surfaces(N, r, refl):
+def write_surfaces(N, r, refl, Nports, rport):
     '''Function to write material cards for Serpent input deck.
     Inputs: 
         N:     size of the N x N checkerboard lattice
         r:     radius of the fuel in the fuel pin [cm]
         refl:  reflector thickness [cm]
+        Nports: number of beam ports [0,1,2,3]
+        rport:  radius of a port [cm]
     Outputs:
         surfaces: String containing the surface cards'''
     
@@ -22,6 +24,9 @@ def write_surfaces(N, r, refl):
     l21   = l20 +  0.1              # Radius of the air gap cylinder
     l22   = l21 + refl              # Radius of the steel reflector cylinder
     fuel_rod_weight = 19.1 * math.pi * r*r * l10 # Uranium mass in each rod [g]
+    my_portholes = ''               # Text string that will contain porthole cell numbers
+    for iport in range(31,31+Nports):
+        my_portholes += '''-{iport}'''
 
     surfaces = '''
 %______________pins_________________________________________________
@@ -44,8 +49,14 @@ air
 surf 10 cyl 0 0 {l10} -{l10} {l10}    % Inner cylinder with the lattice
 surf 20 cyl 0 0 {l20} -{l20} {l20}    % Lead cyllinder around the core
 surf 21 cyl 0 0 {l21} -{l21} {l21}    % Air gap - likely useless
-surf 22 cyl 0 0 {l22} -{l22} {l22}    % Radial reflector
+surf 22 cyl 0 0 {l22} -{l22} {l22} {my_portholes}   % Radial reflector
+'''
+     
+    for iport in range(31,31+Nports):
+        pass
+        #surfaces +='''surf {iport} cyl {portx} {} {}''' TODO
 
+    surfaces +='''
 %______________lattice definitions_____________
 
 lat 50 1 0 0 {N} {N} {pitch}
@@ -59,9 +70,10 @@ lat 50 1 0 0 {N} {N} {pitch}
         for j in range(N):
             jodd = 0
             r_lat = math.sqrt((i-N/2.0 + 0.5)**2 + (j-N/2.0 + 0.5)**2) # cell radius in the lattice in units of N  
-            if ((j == N // 2) and (i == N // 2)) :      # central channel
-                surfaces += "3 "
-            elif ((j+iodd) % 2) and (r_lat < (N-1)/2.0) :
+#            if ((j == N // 2) and (i == N // 2)) :      # central channel
+#                surfaces += "3 "
+#           elif                                         # removed for now 
+            if ((j+iodd) % 2) and (r_lat < (N-1)/2.0) :
                 surfaces += "1 "
                 n_fuel_rods = n_fuel_rods + 1
             else:
