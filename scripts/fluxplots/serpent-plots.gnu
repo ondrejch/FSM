@@ -8,15 +8,15 @@ set ylabel "y [cm]"
 
 set out 'plot_therm2D.png'
 set title "FSM-mk1-case21: thermal flux at z=0"
-plot [-50:50][-50:50]  "mesh.data" i 0 u 1:2:3  w image notit
+plot [-100:100][-100:100]  "mesh.data" i 0 u 1:2:3  w image notit
 
 set out 'plot_epith2D.png'
 set title "FSM-mk1-case21: epithermal flux at z=0"
-plot [-50:50][-50:50]  "mesh.data" i 1 u 1:2:3  w image notit
+plot [-100:100][-100:100]  "mesh.data" i 1 u 1:2:3  w image notit
 
 set out 'plot_fast2D.png'
 set title "FSM-mk1-case21: fast flux at z=0"
-plot [-50:50][-50:50]  "mesh.data" i 2 u 1:2:3  w image notit
+plot [-100:100][-100:100]  "mesh.data" i 2 u 1:2:3  w image notit
 
 
 set terminal pngcairo size 1200,800 enhanced font 'Verdana,12'

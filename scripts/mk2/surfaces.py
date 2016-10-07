@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 #
 # Generate surfaces, pins, and lattice for FastDrum Serpent deck 
 # Ondrej Chvala, ochvala@utk.edu
@@ -6,7 +6,7 @@
 
 import math
 
-def write_surfaces(N, r, refl, Nports, rport):
+def write_surfaces(N=11, r=1.25, refl=30, Nports=3, rport=5.0):
     '''Function to write material cards for Serpent input deck.
     Inputs: 
         N:     size of the N x N checkerboard lattice
@@ -17,16 +17,13 @@ def write_surfaces(N, r, refl, Nports, rport):
     Outputs:
         surfaces: String containing the surface cards'''
     
-    rclad = r + 0.1                 # Claddind outer radius              
+    rclad = r + 0.1                 # Cladding outer radius              
     pitch = 2.0 * rclad + 0.01      # Lattice pitch
-    l10   = N * pitch / 2.0         # Radius of the cylinder bounding the latice
+    l10   = N * pitch / 2.0         # Radius of the cylinder bounding the lattice
     l20   = l10 + pitch             # Radius of the cylinder bounding the lead block
     l21   = l20 +  0.1              # Radius of the air gap cylinder
     l22   = l21 + refl              # Radius of the steel reflector cylinder
     fuel_rod_weight = 19.1 * math.pi * r*r * l10 # Uranium mass in each rod [g]
-    my_portholes = ''               # Text string that will contain porthole cell numbers
-    for iport in range(31,31+Nports):
-        my_portholes += '''-{iport}'''
 
     surfaces = '''
 %______________pins_________________________________________________
@@ -46,23 +43,29 @@ air
 
 %______________surface definitions__________________________________
 
-surf 10 cyl 0 0 {l10} -{l10} {l10}    % Inner cylinder with the lattice
-surf 20 cyl 0 0 {l20} -{l20} {l20}    % Lead cyllinder around the core
-surf 21 cyl 0 0 {l21} -{l21} {l21}    % Air gap - likely useless
-surf 22 cyl 0 0 {l22} -{l22} {l22} {my_portholes}   % Radial reflector
+surf 10 cyl  0 0 {l10} -{l10} {l10}    % Inner cylinder with the lattice
+surf 20 cyl  0 0 {l20} -{l20} {l20}    % Lead cylinder around the core
+surf 21 cyl  0 0 {l21} -{l21} {l21}    % Air gap - likely useless
+surf 22 cyl  0 0 {l22} -{l22} {l22}    % Radial reflector
 '''
      
-    for iport in range(31,31+Nports):
-        pass
-        #surfaces +='''surf {iport} cyl {portx} {} {}''' TODO
+    if Nports>0:                # Beam ports
+        surfaces +='''surf 31 cyly 0 0 {rport} -{l22} -{l10}      % Beam port 1\n'''
 
+    if Nports>1:
+        surfaces +='''surf 32 cylx 0 0 {rport} {l10} {l22}        % Beam port 2\n'''
+
+    if Nports>2:
+        surfaces +='''surf 33 cylx 0 0 {rport} -{l22} -{l10}      % Beam port 3\n'''
+        
+        
     surfaces +='''
 %______________lattice definitions_____________
 
 lat 50 1 0 0 {N} {N} {pitch}
 '''
     n_fuel_rods = 0;
-    for i in range(N):          # Generates checkboard lattice
+    for i in range(N):          # Generates checkerboard lattice
         iodd = 0
         if i % 2 :
             iodd = 1
@@ -92,4 +95,4 @@ lat 50 1 0 0 {N} {N} {pitch}
 if __name__ == '__main__':
     print("This module writes surfaces, pins, and lattice for FastDrum Serpent deck.")
     input("Press Ctrl+C to quit, or enter else to test it.")
-    print(write_surfaces(11, 1.25, 50))
+    print(write_surfaces())

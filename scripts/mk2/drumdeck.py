@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 #
 # Generate Serpent deck for FastDrum Serpent deck
 # Ondrej Chvala, ochvala@utk.edu
@@ -8,7 +8,7 @@ import materials
 import cells
 import surfaces
 
-def write_deck(N=11, r=1.25, refl=30, Nports=0, rport=5.0):
+def write_deck(N=21, r=1.25, refl=50, Nports=3, rport=2.5):
     '''Function to write the FastDrum Serpent input deck.
     Inputs: 
         N:      size of the N x N checkerboard lattice
@@ -20,14 +20,13 @@ def write_deck(N=11, r=1.25, refl=30, Nports=0, rport=5.0):
         output: String containing the FastDrum deck'''
 
     # Header
-    output = '''\
-set title "Fast Flux Research Reactor, N {N}, rfuel {r}, reflector thickness {refl}"
+    output = '''set title "Fast Flux Research Reactor, N {N}, rfuel {r}, reflector thickness {refl}, {Nports} beamports radius {rport} cm."
 '''
     # Surfaces
-    output += surfaces.write_surfaces(N, r, refl)
+    output += surfaces.write_surfaces(N, r, refl, Nports, rport)
 
     # Cells
-    output += cells.write_cells()
+    output += cells.write_cells(Nports)
 
     # Materials
     output += materials.write_materials()
