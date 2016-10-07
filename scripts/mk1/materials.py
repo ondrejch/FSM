@@ -1,18 +1,18 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 #
 # Generate materials for FastDrum Serpent deck
 # Ondrej Chvala, ochvala@utk.edu
 # 2016-08-02
 
 def write_materials(lib = '03c'):
-	'''Function to write material cards for Serpent input deck.
-	Inputs: 
-		lib:	String containing the neutron cross section library
-				to use (e.g., {lib}).
-	Outputs:
-		mats:	String containing the material cards'''
+    '''Function to write material cards for Serpent input deck.
+    Inputs: 
+        lib:    String containing the neutron cross section library
+                to use (e.g., {lib}).
+    Outputs:
+        mats:   String containing the material cards'''
 
-	mats = '''
+    mats = '''
 %______________material definitions_________________________________
 
 mat fuel -19.10 tmp 300.0 rgb 190 10 100      % Fuel is 20% LEU metal
@@ -57,10 +57,10 @@ mat ssteel -7.99949E+00 tmp 300.0 rgb 120 120 120
 28062.03c  -3.54721E-03
 28064.03c  -9.32539E-04
 '''
-	mats = mats.format(**locals())
-	return mats
+    mats = mats.format(**locals())
+    return mats
 
 if __name__ == '__main__':
-	print("This module writes materials for FastDrum Serpent deck.")
-	input("Press Ctrl+C to quit, or enter else to test it. ")
-	print(write_materials())
+    print("This module writes materials for FastDrum Serpent deck.")
+    input("Press Ctrl+C to quit, or enter else to test it. ")
+    print(write_materials())

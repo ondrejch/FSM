@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 #
 # Generate surfaces, pins, and lattice for FastCube Serpent deck 
 # Ondrej Chvala, ochvala@utk.edu
@@ -13,12 +13,12 @@ def write_surfaces(N, r, refl):
     Outputs:
         surfaces: String containing the surface cards'''
     
-    rclad = r + 0.1                 # Claddind outer radius              
+    rclad = r + 0.1                 # Cladding outer radius              
     pitch = 2.0 * rclad + 0.01      # Lattice pitch
-    l10   = N * pitch / 2.0         # Half-size of the cube bounding the latice
+    l10   = N * pitch / 2.0         # Half-size of the cube bounding the lattice
     l20   = l10 + pitch             # Half-size of the cube bounding the lead block
     l21   = l20 +  0.1              # Half-size of the air gap cube
-    l22   = l21 + refl              # Half-size of the steel reflecot cube
+    l22   = l21 + refl              # Half-size of the steel reflector cube
     fuel_rod_weight = 19.1 * 3.1415927 * r*r * l10 # Uranium mass in each rod [g]
 
     surfaces = '''
@@ -44,7 +44,7 @@ surf 22 cube 0 0 0 {l22}
 lat 50 1 0 0 {N} {N} {pitch}
 '''
     n_fuel_rods = 0;
-    for i in range(N):          # Generates checkboard lattice
+    for i in range(N):          # Generates checkerboard lattice
         iodd = 0
         if i % 2 :
             iodd = 1

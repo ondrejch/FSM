@@ -1,4 +1,4 @@
-#! /usr/bin/python3
+#!/usr/bin/env python3
 # 
 # Write the FastCube Serpent deck
 # Ondrej Chvala, ochvala@utk.edu
@@ -14,7 +14,7 @@ filename = "ffrr.inp"
 dirname  = "./"
 
 # Command line argument
-parser = argparse.ArgumentParser(description='Writes Serepnt2 input deck of the Fast Cube Reactor.')
+parser = argparse.ArgumentParser(description='Writes Serpent2 input deck of the Fast Cube Reactor.')
 parser.add_argument('latsize', metavar='N', type=int, nargs='?', default=27,
                    help='lattice size, default = 27') #, required=False)
 parser.add_argument('fuelradius', metavar='r', type=float, nargs='?', default=1.17,

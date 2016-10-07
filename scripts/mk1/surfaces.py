@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 #
 # Generate surfaces, pins, and lattice for FastDrum Serpent deck 
 # Ondrej Chvala, ochvala@utk.edu
@@ -15,9 +15,9 @@ def write_surfaces(N, r, refl):
     Outputs:
         surfaces: String containing the surface cards'''
     
-    rclad = r + 0.1                 # Claddind outer radius              
+    rclad = r + 0.1                 # Cladding outer radius              
     pitch = 2.0 * rclad + 0.01      # Lattice pitch
-    l10   = N * pitch / 2.0         # Radius of the cylinder bounding the latice
+    l10   = N * pitch / 2.0         # Radius of the cylinder bounding the lattice
     l20   = l10 + pitch             # Radius of the cylinder bounding the lead block
     l21   = l20 +  0.1              # Radius of the air gap cylinder
     l22   = l21 + refl              # Radius of the steel reflector cylinder
@@ -37,7 +37,7 @@ lead
 %______________surface definitions__________________________________
 
 surf 10 cyl 0 0 {l10} -{l10} {l10}    % Inner cylinder with the lattice
-surf 20 cyl 0 0 {l20} -{l20} {l20}    % Lead cyllinder around the core
+surf 20 cyl 0 0 {l20} -{l20} {l20}    % Lead cylinder around the core
 surf 21 cyl 0 0 {l21} -{l21} {l21}    % Air gap - likely useless
 surf 22 cyl 0 0 {l22} -{l22} {l22}    % Radial reflector
 
@@ -46,7 +46,7 @@ surf 22 cyl 0 0 {l22} -{l22} {l22}    % Radial reflector
 lat 50 1 0 0 {N} {N} {pitch}
 '''
     n_fuel_rods = 0;
-    for i in range(N):          # Generates checkboard lattice
+    for i in range(N):          # Generates checkerboard lattice
         iodd = 0
         if i % 2 :
             iodd = 1
