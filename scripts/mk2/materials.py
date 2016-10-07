@@ -15,7 +15,7 @@ def write_materials(lib = '03c'):
     mats = '''
 %______________material definitions_________________________________
 
-mat fuel -19.10 tmp 300.0 rgb 190 10 100      % Fuel is 20% LEU metal
+mat fuel -19.10 tmp 300.0 rgb 190 10 100    % Fuel is 20% LEU metal
 92235.03c   -19.75          % U-235
 92238.03c   -80.25          % U-238
 
@@ -25,12 +25,16 @@ mat lead -11.34 tmp 300.0 rgb 10 20 195
 82207.03c   -0.221          % Pb-207
 82208.03c   -0.524          % Pb-208
 
-mat air -0.001205 tmp 300 rgb 200 200 200
+mat air -0.001205 tmp 300 rgb 200 200 200   % Dry air, sea level
  6000.03c   -0.000124
  7014.03c   -0.755268
  8016.03c   -0.231781
 18040.03c   -0.012827
 
+mat water -0.998207 tmp 300 rgp 100 100 250 % De-aerated water at 1 atm.
+  1001.03c  -0.111894
+  8016.03c  -0.888106
+  
 mat salt -4.326 tmp 300 rgb 50 240 50 % FNaK with natural uranium 
  11023.03c  -0.095468   %  Na
   9019.03c  -0.287453   %  F
