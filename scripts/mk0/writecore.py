@@ -15,11 +15,11 @@ dirname  = "./"
 
 # Command line argument
 parser = argparse.ArgumentParser(description='Writes Serpent2 input deck of the Fast Cube Reactor.')
-parser.add_argument('latsize', metavar='N', type=int, nargs='?', default=27,
+parser.add_argument('--latsize', metavar='N', type=int, nargs='?', default=27,
                    help='lattice size, default = 27') #, required=False)
-parser.add_argument('fuelradius', metavar='r', type=float, nargs='?', default=1.17,
+parser.add_argument('--fuelradius', metavar='r', type=float, nargs='?', default=1.17,
                    help='fuel rod radius [cm], default = 1.17 cm')
-parser.add_argument('reflector', metavar='refl', type=float, nargs='?', default=50,
+parser.add_argument('--reflector', metavar='refl', type=float, nargs='?', default=50,
                    help='fuel rod radius [cm], default = 50 cm')
 
 

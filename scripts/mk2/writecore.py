@@ -15,15 +15,15 @@ dirname  = "./"
 
 # Command line argument
 parser = argparse.ArgumentParser(description='Writes Serpent2 input deck for the Fast Drum Reactor, mk2.')
-parser.add_argument('latsize', metavar='N', type=int, nargs='?', default=27,
-                   help='lattice size, default = 27') #, required=False)
-parser.add_argument('fuelradius', metavar='r', type=float, nargs='?', default=1.17,
+parser.add_argument('--latsize', metavar='N', type=int, nargs='?', default=29,
+                   help='lattice size, default = 29') #, required=False)
+parser.add_argument('--fuelradius', metavar='r', type=float, nargs='?', default=1.17,
                    help='fuel rod radius [cm], default = 1.17 cm')
-parser.add_argument('reflector', metavar='refl', type=float, nargs='?', default=50,
+parser.add_argument('--reflector', metavar='refl', type=float, nargs='?', default=50,
                    help='fuel rod radius [cm], default = 50 cm')
-parser.add_argument('ports', metavar='Nports', type=int, nargs='?', default=0,
-                   help='number of beam ports [0-3], default = 0')
-parser.add_argument('rport', metavar='rport', type=float, nargs='?', default=2.0,
+parser.add_argument('--ports', metavar='Nports', type=int, nargs='?', default=0, 
+                   help='number of beam ports [0-3], default = 0', choices=[0, 1, 2, 3])
+parser.add_argument('--rport', metavar='rport', type=float, nargs='?', default=2.0,
                    help='beam port radius [cm], default = 2.0 cm')
 
 # Parse command line arguments
