@@ -31,7 +31,7 @@ mat air -0.001205 tmp 300 rgb 200 200 200   % Dry air, sea level
  8016.03c   -0.231781
 18040.03c   -0.012827
 
-mat water -0.998207 tmp 300 rgp 100 100 250 % De-aerated water at 1 atm.
+mat water -0.998207 tmp 300 rgb 100 100 250 % De-aerated water at 1 atm.
   1001.03c  -0.111894
   8016.03c  -0.888106
   
