@@ -19,7 +19,7 @@ def write_surfaces(N, r, refl):
     l20   = l10 + pitch             # Half-size of the cube bounding the lead block
     l21   = l20 +  0.1              # Half-size of the air gap cube
     l22   = l21 + refl              # Half-size of the steel reflector cube
-    fuel_rod_weight = 19.1 * 3.1415927 * r*r * l10 # Uranium mass in each rod [g]
+    fuel_rod_weight = 19.1 * 3.1415927 * r*r * l10 * 2.0 # Uranium mass in each rod [g]
 
     surfaces = '''
 %______________pins_________________________________________________

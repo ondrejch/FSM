@@ -23,7 +23,7 @@ def write_surfaces(N=11, r=1.25, refl=30, Nports=3, rport=5.0):
     l20   = l10 + pitch             # Radius of the cylinder bounding the lead block
     l21   = l20 +  0.1              # Radius of the air gap cylinder
     l22   = l21 + refl              # Radius of the steel reflector cylinder
-    fuel_rod_weight = 19.1 * math.pi * r*r * l10 # Uranium mass in each rod [g]
+    fuel_rod_weight = 19.1 * math.pi * r*r * l10 *2.0# Uranium mass in each rod [g]
 
     surfaces = '''
 %______________pins_________________________________________________
