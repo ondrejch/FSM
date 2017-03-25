@@ -9,6 +9,14 @@ coreHeight     = 121.92
 rodRadius      = 1.27
 rodHeight      = 121.92
 radius_limiter = 48
+"""
+side           = 2
+rodSpacing     = 3.81
+cladSideLength = 3.81
+coreHeight     = 121.92
+rodRadius      = 1.27
+rodHeight      = 121.92
+radius_limiter = 10"""
 core1 = Checkerboard.Checkerboard(side,rodSpacing,cladSideLength,coreHeight,rodRadius,rodHeight,radius_limiter)
 core1.genCheckerboardCore()
 

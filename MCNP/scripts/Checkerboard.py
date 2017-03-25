@@ -66,8 +66,9 @@ class Checkerboard():
                         num += 1
                         print(num)
                     else:
+                        pass
                         # make the lead block
-                        self.cube([x_position, y_position, z_position], self.rodSpacing, self.rodSpacing, self.coreHeight, False,"$ lead")
+                        #self.cube([x_position, y_position, z_position], self.rodSpacing, self.rodSpacing, self.coreHeight, False,"$ lead")
                 else:
 
                     if (x % 2 != 0):
@@ -79,10 +80,12 @@ class Checkerboard():
                         num += 1
                         print(num)
                     else:
+                        pass
                         # make the lead block
-                        self.cube([x_position, y_position, z_position], self.rodSpacing, self.rodSpacing,
-                                  self.coreHeight, False,"$ lead")
-        self.sphere([0, 0, 0], 1000, "$ around core")
+                        #self.cube([x_position, y_position, z_position], self.rodSpacing, self.rodSpacing,
+                        #          self.coreHeight, False,"$ lead")
+        self.sphere([0, 0, 0], 1000, "$ universe")
+        self.cylinder([0, 0, 0],self.radiusLimiter,self.coreHeight,"$ core")
         self.generateCells()
 
     def cylinder(self, position, radius, height,comment):
@@ -131,7 +134,6 @@ class Checkerboard():
 
     # for making all of the cells
     def generateCells(self):
-
         numSurfs = len(self.surfaceCard)-1
         # go through every surface
         for surface in self.surfaceCard:
@@ -141,15 +143,18 @@ class Checkerboard():
             if i==999:
                 # ID MAT_ID DENS INSIDE OUTSIDE ...kwargs...
                 # if material is void (i.e., 0), then DENS should be ""
-                self.cellCard.append("%s %s %s %s %s %s"%(i-1,0,"","-999",self.cellUnion(1,numSurfs,[i],len(str(i-1)+"-999imp:n=1")+1),"imp:n=1"))
+                self.cellCard.append("%s %s %s %s %s %s"%(i-1,0,"","-999",str(self.surfaceNumber),"imp:n=1")) #self.cellUnion(1,numSurfs,[i],len(str(i-1)+"-999imp:n=1")+1),"imp:n=1"))
+            elif i==self.surfaceNumber:
+                self.cellCard.append("%s %s %s %s %s %s" % (i , 1, "-11.34", str(-(i)), self.cellUnion(1, numSurfs, [i], len(str(i - 1) + "-999imp:n=1") + 1), "imp:n=1"))
             else:
                 # if the material is lead
                 if surface[-1]=="lead":
-                    self.cellCard.append("%s %s %s %s %s %s" % (i, 1, "-11.34", "-999 "+str(-(i)), self.cellUnion(1, numSurfs, [i],len(str(i)+"-11.34-999imp:n=1")+1),"imp:n=1"))
+                    pass
+                    #self.cellCard.append("%s %s %s %s %s %s" % (i, 1, "-11.34", "-999 "+str(-(i)), self.cellUnion(1, numSurfs, [i],len(str(i)+"-11.34-999imp:n=1")+1),"imp:n=1"))
                 elif surface[-1]=="fuel":
                     self.cellCard.append("%s %s %s %s %s %s" % (i, 2, "-19.1", str(-(i)), "","imp:n=1")) # self.cellUnion(1, numSurfs, [i,i-1]) and "-999 "+str(-(i))
                 elif surface[-1]=="cladding":
-                    self.cellCard.append("%s %s %s %s %s %s" % (i, 3, "-2.70", "-999 "+str(-(i)), i+1,"imp:n=1")) #self.cellUnion(1, numSurfs, [i,i+1])
+                    self.cellCard.append("%s %s %s %s %s %s" % (i, 3, "-2.70", str(-1*self.surfaceNumber)+" "+str(-(i)), i+1,"imp:n=1")) #self.cellUnion(1, numSurfs, [i,i+1])
 
         self.cellCard.append("%s %s %s %s %s %s" % (999, 0, "", "", "999", "imp:n=0"))
     # generate a union string for a cell
@@ -162,13 +167,18 @@ class Checkerboard():
 
             if i in skip:
                 pass
+            elif i==min:
+                result+=str(i)
             else:
-                result+=str(i)+" "
+                result += " " + str(i)
             if counter>70:
                 result+="& \n"
                 counter=0
             i+=1
-        result+=str(max)+")"
+        if max in skip:
+            result+=")"
+        else:
+            result+=str(max)+")"
 
         if i<2:
             result=""
@@ -196,4 +206,4 @@ class Checkerboard():
             for surface in self.surfaceCard:
                 f2w.write(surface+"\n")
 
-            f2w.write("\nc DATA CARD\nSDEF \nM1 82000 1\nM2 92235 .1975 92238 0.8025\nM3 13027 1\nNPS 1000\n")
+            f2w.write("\nc DATA CARD\nM1 82000 1\nM2 92235 .1975 92238 0.8025\nM3 13027 1\nKSRC 0 0 65\nKCODE 1000 1 10 310\n")
