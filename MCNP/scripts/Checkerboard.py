@@ -52,26 +52,32 @@ class Checkerboard():
                 z_position = z0
 
                 # if the current position is outside of the radius limiting boundary, then skip
-                if (numpy.sqrt(numpy.power(x_position, 2.0) + numpy.power(y_position, 2.0)) >= self.radiusLimiter):
+                if (numpy.sqrt(numpy.power(x_position, 2.0) + numpy.power(y_position, 2.0))+ self.rodSpacing/2.0*numpy.sqrt(2.0) >= self.radiusLimiter):
                     pass
                 # flip the positioning of the lead and fuel blocks for every other increment of y
                 elif (y % 2 == 0):
+
                     # flip the positioning of the lead and fuel blocks for every other increment of y
                     if(x % 2 == 0):
                         # make the cladding that the fuel rod sits in
                         self.cube([x_position, y_position, z_position], self.cladSide, self.cladSide, self.coreHeight,True,"$ cladding")
                         # make the fuel rod
                         self.cylinder([x_position, y_position, z_position],self.rodRadius,self.rodHeight,"$ fuel")
+                        num += 1
+                        print(num)
                     else:
                         # make the lead block
                         self.cube([x_position, y_position, z_position], self.rodSpacing, self.rodSpacing, self.coreHeight, False,"$ lead")
                 else:
+
                     if (x % 2 != 0):
                         # make the cladding that the fuel rod sits in
                         self.cube([x_position, y_position, z_position], self.cladSide, self.cladSide, self.coreHeight,
                                   True,"$ cladding")
                         # make the fuel rod
                         self.cylinder([x_position, y_position, z_position], self.rodRadius, self.rodHeight,"$ fuel")
+                        num += 1
+                        print(num)
                     else:
                         # make the lead block
                         self.cube([x_position, y_position, z_position], self.rodSpacing, self.rodSpacing,
@@ -86,7 +92,7 @@ class Checkerboard():
         self.points.append([position[0], position[1]])
         #          x  y  z     h1 h2 h3   R
         self.surfaceCard.append(str("%s RCC %g %g %g    %s %s %s   %s %s")%(self.surfaceNumber,position[0],position[1],position[2],0,0,height,radius,comment))
-        print(self.surfaceCard[-1])
+        #print(self.surfaceCard[-1])
 
     def cube(self, position, xD, yD, zD, clad,comment):
         self.surfaceNumber += 1
@@ -107,11 +113,11 @@ class Checkerboard():
             self.points2.append([position[0], position[1]])
 
         self.surfaceCard.append(str("%s RPP %g %g    %g %g    %g %g %s")%(self.surfaceNumber,xMin,xMax,yMin,yMax,zMin,zMax,comment))
-        print(self.surfaceCard[-1])
+        #print(self.surfaceCard[-1])
 
     def sphere(self,position,radius,comment):
         self.surfaceCard.append(str("%s SPH %g %g %g    %g %s") % (999, position[0], position[1], position[2], radius, comment))
-        print(self.surfaceCard[-1])
+        #print(self.surfaceCard[-1])
 
     # for making a single cell
     def cell(self,inSurfaceNum,outSurfaceNum):
@@ -135,11 +141,11 @@ class Checkerboard():
             if i==999:
                 # ID MAT_ID DENS INSIDE OUTSIDE ...kwargs...
                 # if material is void (i.e., 0), then DENS should be ""
-                self.cellCard.append("%s %s %s %s %s %s"%(i-1,0,"","-999",self.cellUnion(1,numSurfs,[i]),"imp:n=1"))
+                self.cellCard.append("%s %s %s %s %s %s"%(i-1,0,"","-999",self.cellUnion(1,numSurfs,[i],len(str(i-1)+"-999imp:n=1")+1),"imp:n=1"))
             else:
                 # if the material is lead
                 if surface[-1]=="lead":
-                    self.cellCard.append("%s %s %s %s %s %s" % (i, 1, "-11.34", "-999 "+str(-(i)), self.cellUnion(1, numSurfs, [i]),"imp:n=1"))
+                    self.cellCard.append("%s %s %s %s %s %s" % (i, 1, "-11.34", "-999 "+str(-(i)), self.cellUnion(1, numSurfs, [i],len(str(i)+"-11.34-999imp:n=1")+1),"imp:n=1"))
                 elif surface[-1]=="fuel":
                     self.cellCard.append("%s %s %s %s %s %s" % (i, 2, "-19.1", str(-(i)), "","imp:n=1")) # self.cellUnion(1, numSurfs, [i,i-1]) and "-999 "+str(-(i))
                 elif surface[-1]=="cladding":
@@ -147,18 +153,18 @@ class Checkerboard():
 
         self.cellCard.append("%s %s %s %s %s %s" % (999, 0, "", "", "999", "imp:n=0"))
     # generate a union string for a cell
-    def cellUnion(self,min,max,skip):
+    def cellUnion(self,min,max,skip,size):
         i=min
         result="("
-        counter=0
+        counter=size
         while i<max:
-            counter+=1
+            counter+=len(str(i))+1
 
             if i in skip:
                 pass
             else:
                 result+=str(i)+" "
-            if counter>19:
+            if counter>70:
                 result+="& \n"
                 counter=0
             i+=1
