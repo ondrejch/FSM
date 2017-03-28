@@ -28,8 +28,11 @@ cell    4   0   ssteel   21 -22 {my_portholes}
     for iport in range(31,31+Nports):
         cells += 'cell   {0:d}   0   air 21 -22 -{0:d}\n'.format(iport)
 
-    cells += '''cell   99   0   outside    22
-'''
+    cells += '''cell   99   0   outside    22 \n'''
+
+    if Nports>0:                # add cell for flux detection
+        cells += '''cell 777 -1 void -777   % cell to measure port flux in\n'''
+
     cells = cells.format(**locals())
     return cells
 

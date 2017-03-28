@@ -75,11 +75,14 @@ mesh 3 3000 3000
 % Define mesh cell volume 
 %det mydet dv 4
 %de groupE
-%dx -100 100 201
-%dy -100 100 201
+%dx -120 120 240
+%dy -120 120 240
 %dz  -2 2 1
 '''
     output += flux_xy_cards
+
+    if Nports>0:                # Add portflux detector
+        output += '''det portflux dc 777   % total flux in 1x1x1x cm cube mid port\n'''
 
     output = output.format(**locals())
     return output
