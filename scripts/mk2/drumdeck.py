@@ -83,8 +83,8 @@ mesh 3 3000 3000
     output += flux_xy_cards
 
     # Pin heating detector - to compare with _core0.m pin power output. Disabled by default.
-    pinvolume =  surfaces.fuel_rod_volume(N,r)
-    output += '''%det pinpower dl 50 dm fuel dr -8 void dv {pinvolume}\n'''
+    # pinvolume =  surfaces.fuel_rod_volume(N,r) # NOTE pin volume is not needed for dr -8 !!!
+    output += '''%det pinpower dl 50 dm fuel dr -8 fuel\n'''
 
     if Nports>0:                # Add portflux detector
         output += '''det portflux dc 777   % total flux in 1x1x1x cm cube mid port\n'''
