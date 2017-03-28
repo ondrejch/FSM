@@ -48,7 +48,7 @@ try:
     f = open(fname, 'w')
     f.write(s2_deck)
     f.close()
-    print("Deck written,")
+    print("Deck written!")
 except IOError as e:
     print("Unable to write to file", fname)
     print(e)

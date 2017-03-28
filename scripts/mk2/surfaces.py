@@ -6,6 +6,23 @@
 
 import math
 
+def clad_outer_radius(r=1.25):
+    '''Clading outer radius'''
+    return r + 0.1
+
+def lattice_pitch(r=1.25):
+    '''Core lattice pitch'''
+    return 2.0 * clad_outer_radius(r) + 0.01
+
+def fuel_rod_height(N=11, r=1.25):
+    '''Height of the fuel pin, equals the radius of the cylinder bounding the lattice'''
+    return N * lattice_pitch(r) / 2.0
+
+def fuel_rod_volume(N,r):
+    '''Volume of the uranium fuel pin, without cladding [cm^3]'''
+    return math.pi * r*r * fuel_rod_height(N,r) * 2.0
+
+
 def write_surfaces(N=11, r=1.25, refl=30, Nports=3, rport=5.0):
     '''Function to write material cards for Serpent input deck.
     Inputs: 
@@ -17,13 +34,13 @@ def write_surfaces(N=11, r=1.25, refl=30, Nports=3, rport=5.0):
     Outputs:
         surfaces: String containing the surface cards'''
     
-    rclad = r + 0.1                 # Cladding outer radius              
-    pitch = 2.0 * rclad + 0.01      # Lattice pitch
-    l10   = N * pitch / 2.0         # Radius of the cylinder bounding the lattice
+    rclad = clad_outer_radius(r)    # Cladding outer radius
+    pitch = lattice_pitch(r)        # Lattice pitch
+    l10   = fuel_rod_height(N,r)    # Radius of the cylinder bounding the lattice
     l20   = l10 + pitch             # Radius of the cylinder bounding the lead block
     l21   = l20 +  0.1              # Radius of the air gap cylinder
     l22   = l21 + refl              # Radius of the steel reflector cylinder
-    fuel_rod_weight = 19.1 * math.pi * r*r * l10 *2.0# Uranium mass in each rod [g]
+    fuel_rod_weight = 19.1 * fuel_rod_volume(N,r)   # Uranium mass in each rod [g]
 
     surfaces = '''
 %______________pins_________________________________________________
