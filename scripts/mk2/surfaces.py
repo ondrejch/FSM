@@ -69,7 +69,7 @@ surf 22 cyl  0 0 {l22} -{l22} {l22}    % Radial reflector
     if Nports>0:                # Beam ports
         midport   = (l22+l10)/2.0          # midpoint in y along the beam port
         surfaces +='''surf 31 cyly 0 0 {rport} -{l22} -{l10}      % Beam port 1\n'''
-        surfaces +='''surf 777 cube 0 -{midport} 0 0.5   % 1x1x1 cube mid beamport\n'''
+        surfaces +='''surf 77 cube 0 -{midport} 0 0.5             % 1x1x1 cube mid beamport\n'''
 
     if Nports>1:
         surfaces +='''surf 32 cylx 0 0 {rport} {l10} {l22}        % Beam port 2\n'''

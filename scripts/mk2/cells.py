@@ -19,19 +19,19 @@ def write_cells(Nports=3):
     cells = '''
 %______________cell definitions_____________________________________
 
-cell    1   0   fill   50 -10
-cell    2   0   lead   10 -20
-cell    3   0   air   20 -21
-cell    4   0   ssteel   21 -22 {my_portholes}
+cell    1   0   fill    50 -10
+cell    2   0   lead    10 -20
+cell    3   0   air     20 -21
+cell    4   0   ssteel  21 -22 {my_portholes}
 '''
 
     for iport in range(31,31+Nports):
-        cells += 'cell   {0:d}   0   air 21 -22 -{0:d}\n'.format(iport)
+        cells += 'cell   {0:d}   0   air     21 -22 -{0:d}\n'.format(iport)
 
-    cells += '''cell   99   0   outside    22 \n'''
+    cells += '''cell   99   0   outside 22 \n'''
 
     if Nports>0:                # add cell for flux detection
-        cells += '''cell 777 -1 void -777   % cell to measure port flux in\n'''
+        cells += '''cell  777  -1   void   -77      % cell to measure midpoint port flux\n'''
 
     cells = cells.format(**locals())
     return cells
