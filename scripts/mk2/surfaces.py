@@ -105,8 +105,9 @@ lat 50 1 0 0 {N} {N} {pitch}
 
     surfaces += "\n"
     surfaces += "% Number of fuel rods = {}\n".format(n_fuel_rods)
-    surfaces += "% Uranium weight per rod [kg] = {:8.4f}\n".format(fuel_rod_weight/ 1e3)
-    surfaces += "% Total uranium weight   [kg] = {:8.4f}\n".format( n_fuel_rods * fuel_rod_weight/ 1e3)
+    surfaces += "% Uranium rot volume [cm^3] = {:8.4f}\n".format(fuel_rod_volume(N,r))
+    surfaces += "% Uranium weight per rod [kg] = {:8.4f}\n".format(fuel_rod_weight / 1e3)
+    surfaces += "% Total uranium weight   [kg] = {:8.4f}\n".format(n_fuel_rods * fuel_rod_weight/ 1e3)
     
     surfaces = surfaces.format(**locals())
     return surfaces
