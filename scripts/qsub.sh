@@ -15,7 +15,7 @@ module load mpi
 module load serpent
 cd ${PBS_O_WORKDIR}
 
-sss2 -omp 4 ffrr.inp
+sss2 -omp 4 ffrr.inp > runout.txt
 
 # We do not need this file, safe disk pace
 # rm ffrr.inp.out
