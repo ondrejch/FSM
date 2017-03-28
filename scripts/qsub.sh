@@ -24,5 +24,5 @@ sss2 -omp 4 ffrr.inp > runout.txt
 awk 'BEGIN{ORS="\t"} /ANA_KEFF/ || /CONVERSION/ {print $7" "$8;}' ffrr.inp_res.m > done.out
 grep "Fast Flux" ffrr.inp | sed -e s/[a-Z,\"]//g  >> done.out
 
-awk -v max=0 '/% a$/{if($2>max){want=$2; max=$2}}END{print "Hottest pin power:",want}' ffrr.inp_core0.m >> done.out
+awk -v max=0 '/% a$/{if($2>max){want=$2; max=$2}}END{print "Hottest pin power [W]:",want}' ffrr.inp_core0.m >> done.out
 
