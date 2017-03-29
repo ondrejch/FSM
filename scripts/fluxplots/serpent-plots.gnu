@@ -1,5 +1,5 @@
 
-load 'default.plt'
+load '~/git/FSM/scripts/fluxplots/default.plt'
 
 set terminal pngcairo size 1000,800 enhanced font 'Verdana,12'
 
