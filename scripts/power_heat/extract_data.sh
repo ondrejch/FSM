@@ -31,9 +31,3 @@ for d in $(ls -d powe*) ; do
     fi
 done
 
-# RESULTS- Liner scaling
-#
-# Flux in midpoint of port hole = 4.14966e+06 * core_power  [n/cm^2/s]
-# Maximum pin power             = 0.00511806  * core_power  [W]
-# Max power pin heating rate    = 0.0277916   * core_power  [K/hour]
-
