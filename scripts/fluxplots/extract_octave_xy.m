@@ -41,7 +41,7 @@ for i = 1:size(DETmydet,1)
   if(DETmydet(i,2) == 3) 
     fprintf(fout, "%f %f %e %e\n",DETmydetX(DETmydet(i,10)), DETmydetY(DETmydet(i,9)), DETmydet(i,11),DETmydet(i,12));
     fastf(j) = DETmydet(i,11);
-    fastfe(j)= DETmydet(i,11);
+    fastfe(j)= DETmydet(i,12);
     j = j +1;
   endif 
 endfor
