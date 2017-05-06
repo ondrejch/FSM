@@ -3,7 +3,7 @@
 # Generate cells for 7x7 Cassette Filled Serpent deck
 # Ondrej Chvala, ochvala@utk.edu
 # Will Cureton, wcureton@vols.utk.edu
-# 2016-08-02
+# 2017-04-18
 
 def write_cells(Nports=3):
     '''Function to write cell cards for the Serpent input deck.
