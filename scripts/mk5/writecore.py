@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 # 
-# Write the FastDrum Serpent deck
+# Write the 7x7 Cassette filled Serpent deck
 # Ondrej Chvala, ochvala@utk.edu
+# Will Cureton, wcureton@vols.utk.edu
 # 2016-08-02
 
 import drumdeck
