@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 #
-# Generate cells for FastDrum Serpent deck
-# Ondrej Chvala, ochvala@utk.edu
+# Generate cells for 7x7 Cassette Filled Serpent deck
+# Will Cureton, wcureton@vols.utk.edu
 # 2016-08-02
 
 def write_cells(Nports=3):
