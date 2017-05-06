@@ -2,6 +2,7 @@
 #
 # Generate materials for FastDrum Serpent deck
 # Ondrej Chvala, ochvala@utk.edu
+# Will Cureton, wcureton@vols.utk.edu
 # 2016-08-02
 
 def write_materials(lib = '03c'):
