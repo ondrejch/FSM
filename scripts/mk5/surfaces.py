@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 #
-# Generate surfaces, pins, and lattice for FastDrum Serpent deck 
+# Generate surfaces, pins, and lattice for 7x7 Cassette Filled Serpent deck 
+# Ondrej Chvala, ochvala@utk.edu
 # Will Cureton, wcureton@vols.utk.edu
 # 2017-04-18
 
