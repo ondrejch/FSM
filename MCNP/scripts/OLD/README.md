@@ -1,5 +1,7 @@
 This directory contains input decks for generating MCNP6 input decks. When you upload a script, please include a description of it below. If a script is incomplete and thus not working properly, please place (INCOMPLETE) next to it so we know.
 
+THESE ARE OUT OF DATE AND NO LONGER SUPPORTED
+
 Checkerboard.py ~~~~~~~~~~
 
 Description: Contains a class for generating an MCNP6 input deck for a checkerboard core layout. Creates cells, surfaces, and data card
